@@ -1,115 +1,253 @@
-# Pomodoro Focus Timer - Enhanced with Dynamic Backgrounds
+# 🍅 Pomodoro Focus Timer
 
-## 🎨 Background Image System
+A beautiful, feature-rich Pomodoro timer with **98 dynamic backgrounds** across 7 categories that automatically change to keep your workspace fresh and inspiring.
 
-### Image Source
-The app now uses **Lorem Picsum** (`picsum.photos`) for reliable, high-quality images:
-- **Format**: `https://picsum.photos/seed/{seed}/1920/1080`
-- **Reliability**: 100% uptime, no API keys required
-- **Consistency**: Same seed always returns the same image
-- **Quality**: 1920x1080 resolution, optimized for web
+![Pomodoro Timer](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8) ![License](https://img.shields.io/badge/License-MIT-green)
 
-### Categories (7 types × 14 images each = 98 total images)
+## ✨ Features
 
-1. **🌿 Nature** - Meadows, forests, valleys, rivers, lakes, waterfalls
-2. **🏙️ Cityscape** - New York, skylines, downtown, bridges, urban scenes
-3. **☁️ Clouds** - Sky patterns, fluffy clouds, sunset clouds, dreamy scenes
-4. **🌊 Ocean** - Waves, beaches, tropical waters, deep sea, coastal views
-5. **🏔️ Mountains** - Peaks, alpine scenes, snowy mountains, misty ridges
-6. **🌲 Forest** - Deep woods, pine forests, jungle, sunlit trails
-7. **🌅 Sunset** - Orange, red, pink, golden hour scenes
+### 🎯 Core Functionality
+- **Three Timer Modes**: Focus (25min), Short Break (5min), Long Break (15min)
+- **Custom Durations**: Fully customizable timer lengths
+- **Smart Session Tracking**: Automatically tracks completed focus sessions
+- **Auto-Switching**: Seamlessly transitions between focus and break modes
+- **Session Counter**: Visual indicator showing progress toward long break (every 4 sessions)
+
+### 🎨 Dynamic Background System
+- **98 Beautiful Backgrounds**: 7 categories × 14 images each
+- **Auto-Rotation**: Configurable intervals (1-60 minutes)
+- **Manual Navigation**: Previous/Next controls
+- **Category Filtering**: Choose which background categories to display
+- **Smooth Transitions**: Elegant fade effects between images
+- **Image Preloading**: No flickering, seamless experience
+
+### 🎭 Adaptive Color Themes
+- **Dynamic UI Colors**: Timer, buttons, and accents automatically adjust to match each background
+- **Smart Overlays**: Ensures text readability on any background
+- **Smooth Transitions**: 0.7s color transitions for a polished feel
+
+### 📊 Statistics & Tracking
+- **Today's Focus Time**: Total minutes/hours focused today
+- **Session Count**: Number of completed focus sessions
+- **Last Session Info**: Duration of most recent session
+- **Persistent Data**: All stats saved to localStorage
+
+### 🔔 Notifications
+- **Sound Alerts**: Gentle notification sound when timer completes
+- **Browser Notifications**: Desktop notifications (with permission)
+- **Auto Mode Switch**: Automatically starts break after focus session
+
+## 🖼️ Background Categories
+
+| Category | Emoji | Description |
+|----------|-------|-------------|
+| **Nature** | 🌿 | Meadows, forests, valleys, rivers, waterfalls |
+| **Cityscape** | 🏙️ | New York, skylines, bridges, urban scenes |
+| **Clouds** | ☁️ | Sky patterns, fluffy clouds, dreamy scenes |
+| **Ocean** | 🌊 | Waves, beaches, tropical waters, coastal views |
+| **Mountains** | 🏔️ | Peaks, alpine scenes, snowy mountains |
+| **Forest** | 🌲 | Deep woods, pine forests, jungle trails |
+| **Sunset** | 🌅 | Orange, red, pink, golden hour scenes |
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/YOUR_USERNAME/pomodoro-focus-timer.git
+cd pomodoro-focus-timer
+```
+
+2. **Install dependencies**
+```bash
+npm install
+```
+
+3. **Start development server**
+```bash
+npm run dev
+```
+
+4. **Open your browser**
+Navigate to `http://localhost:5173`
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+The optimized build will be in the `dist/` folder.
+
+## 📖 Usage Guide
+
+### Starting a Focus Session
+1. Select **Focus** mode (default)
+2. Click the **Start** button
+3. Work until the timer completes
+4. Take a break automatically
+
+### Managing Breaks
+- **Short Break**: After 1-3 focus sessions
+- **Long Break**: After every 4 focus sessions
+- Session dots show progress toward long break
+
+### Changing Backgrounds
+- **Manual**: Use ← → arrow buttons below the timer
+- **Auto**: Enable auto-rotation in background settings
+- **Settings**: Click the image icon (top right)
+
+### Customizing Timer
+1. Click the **gear icon** (top right)
+2. Adjust Focus, Short Break, and Long Break durations
+3. Click **Save**
+
+### Background Settings
+1. Click the **image icon** (top right)
+2. Toggle auto-rotation on/off
+3. Set rotation interval (1-60 minutes)
+4. Select specific categories to include
+5. Click **Save**
+
+## 🛠️ Tech Stack
+
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Lightning-fast build tool
+- **Tailwind CSS 4** - Utility-first styling
+- **Lorem Picsum** - Reliable image service
+- **Custom Hooks** - Clean, reusable logic
+
+## 📁 Project Structure
+
+```
+pomodoro-focus-timer/
+├── src/
+│   ├── components/
+│   │   ├── BackgroundControls.tsx  # Background navigation UI
+│   │   ├── Controls.tsx            # Timer controls (start/pause/reset)
+│   │   ├── ModeSelector.tsx        # Focus/Short/Long break selector
+│   │   ├── Settings.tsx            # Timer settings modal
+│   │   ├── Statistics.tsx          # Today's stats display
+│   │   └── TimerDisplay.tsx        # Circular timer with progress ring
+│   ├── data/
+│   │   └── backgrounds.ts          # 98 background images + themes
+│   ├── hooks/
+│   │   ├── useBackgroundRotation.ts # Background rotation logic
+│   │   ├── useLocalStorage.ts      # localStorage persistence
+│   │   └── useTimer.ts             # Timer countdown logic
+│   ├── App.tsx                     # Main app component
+│   ├── main.tsx                    # Entry point
+│   └── index.css                   # Global styles
+├── public/                         # Static assets
+├── index.html                      # HTML template
+├── package.json                    # Dependencies
+├── tsconfig.json                   # TypeScript config
+├── vite.config.ts                  # Vite configuration
+└── README.md                       # This file
+```
+
+## 🎨 Features in Detail
 
 ### Dynamic Color Themes
-Each background image has a custom color theme that automatically adjusts:
+Each of the 98 backgrounds has a custom color palette that automatically adjusts:
 - Timer ring color
 - Timer text color
+- Button backgrounds and text
+- Mode selector active state
 - Accent colors
-- Button colors
-- Mode selector colors
-- Overlay tint for text readability
+- Overlay tint for readability
 
-### Auto-Rotation Features
-- **Configurable interval**: 1-60 minutes
-- **Manual navigation**: Previous/Next buttons
-- **Progress indicator**: Visual dots showing current position
-- **Smooth transitions**: Fade effects between images
-- **Image preloading**: Next image loads in background to prevent flickering
+### Smart Session Management
+- Tracks focus sessions per day
+- Automatically switches to break mode after focus
+- Every 4th session triggers a long break
+- Session count resets daily
 
-### Settings
-Access background settings via the image icon in the top-right corner:
-- Toggle auto-rotation on/off
-- Set rotation interval (minutes)
-- Select specific categories to include
-- View current image position
+### Background Rotation
+- **Sequential**: Cycles through all images in selected categories
+- **Preloading**: Next image loads in background for smooth transitions
+- **Persistent**: Remember your position across sessions
+- **Category Filtering**: Include only your favorite categories
 
-## 🎯 Core Features
+## 🔧 Configuration
 
-### Timer Modes
-- **Focus** (default 25 min) - Deep work sessions
-- **Short Break** (default 5 min) - Quick rest
-- **Long Break** (default 15 min) - Extended rest after 4 focus sessions
+### Default Timer Durations
+```typescript
+{
+  focus: 25,      // minutes
+  shortBreak: 5,  // minutes
+  longBreak: 15   // minutes
+}
+```
 
-### Controls
-- Start/Pause/Resume
-- Reset timer
-- Custom duration settings
-- Session tracking
-
-### Statistics
-- Today's total focus time
-- Number of sessions completed
-- Last session duration
-- Session progress dots (4 sessions = 1 long break cycle)
-
-### Notifications
-- Sound notification when timer completes
-- Browser notifications (with permission)
-- Automatic mode switching (Focus → Break → Focus)
-
-### Data Persistence
-All data saved to localStorage:
-- Timer durations
-- Focus sessions history
-- Background settings
-- Current background position
-- Focus session count
-
-## 🚀 Usage
-
-1. **Start a focus session**: Click "Start" button
-2. **Take a break**: Automatically switches after focus completes
-3. **Change background**: Use arrow buttons or enable auto-rotation
-4. **Customize settings**: Click gear icon for timer, image icon for backgrounds
-5. **Track progress**: View today's statistics below the timer
-
-## 🎨 Theme Adaptation
-
-The UI dynamically adapts to each background:
-- Light backgrounds → Dark text and buttons
-- Dark backgrounds → Light text and buttons
-- Colorful backgrounds → Complementary accent colors
-- All transitions are smooth (0.7s ease)
+### Default Background Settings
+```typescript
+{
+  intervalMinutes: 5,        // Auto-rotate every 5 minutes
+  selectedCategories: [],    // Empty = all categories
+  enabled: true              // Auto-rotation enabled
+}
+```
 
 ## 📱 Responsive Design
 
-- Works on desktop, tablet, and mobile
-- Touch-friendly controls
-- Optimized for all screen sizes
-- Glassmorphism UI elements for modern look
+- **Desktop**: Full-featured experience
+- **Tablet**: Optimized layout
+- **Mobile**: Touch-friendly controls
 
-## 🔧 Technical Details
+## 🌐 Browser Support
 
-- **React 18** with TypeScript
-- **Tailwind CSS** for styling
-- **Vite** for fast builds
-- **Custom hooks** for timer and background logic
-- **No external dependencies** for images (uses picsum.photos CDN)
+- Chrome/Edge (recommended)
+- Firefox
+- Safari
+- Opera
 
-## 📝 Notes
+## 🤝 Contributing
 
-- Images are loaded from picsum.photos CDN
-- Each seed generates a unique, consistent image
-- No API keys or authentication required
-- Images are optimized for web (1920x1080)
-- Smooth fade transitions between images
-- Automatic preloading of next image
+Contributions are welcome! Feel free to:
+- Report bugs
+- Suggest new features
+- Submit pull requests
+- Add more background categories
+
+## 📄 License
+
+MIT License - feel free to use this project for personal or commercial purposes.
+
+## 🙏 Acknowledgments
+
+- **Lorem Picsum** for reliable, high-quality images
+- **Unsplash** for inspiration
+- **Tailwind CSS** for the amazing utility-first framework
+- **React** and **Vite** teams for the incredible tools
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+1. Check existing GitHub Issues
+2. Create a new issue with details
+3. Include screenshots if applicable
+
+## 🎯 Roadmap
+
+- [ ] Add more background categories
+- [ ] Custom background upload
+- [ ] Dark/Light mode toggle
+- [ ] Export statistics
+- [ ] Keyboard shortcuts
+- [ ] PWA support
+- [ ] Sound customization
+- [ ] Task list integration
+
+---
+
+**Made with ❤️ for productivity enthusiasts**
+
+⭐ Star this repo if you find it useful!
+
