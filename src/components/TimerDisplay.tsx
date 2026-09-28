@@ -1,4 +1,5 @@
 import React from 'react';
+import { BackgroundTheme } from '../data/backgrounds';
 
 type Mode = 'focus' | 'shortBreak' | 'longBreak';
 
@@ -6,18 +7,18 @@ interface TimerDisplayProps {
   timeLeft: number;
   progress: number;
   mode: Mode;
+  theme: BackgroundTheme;
 }
 
-const modeColors: Record<Mode, { ring: string; bg: string; text: string }> = {
-  focus: { ring: '#ef4444', bg: 'bg-red-50', text: 'text-red-600' },
-  shortBreak: { ring: '#10b981', bg: 'bg-emerald-50', text: 'text-emerald-600' },
-  longBreak: { ring: '#3b82f6', bg: 'bg-blue-50', text: 'text-blue-600' },
+const modeLabels: Record<Mode, string> = {
+  focus: 'Focus Time',
+  shortBreak: 'Short Break',
+  longBreak: 'Long Break',
 };
 
-export const TimerDisplay: React.FC<TimerDisplayProps> = ({ timeLeft, progress, mode }) => {
+export const TimerDisplay: React.FC<TimerDisplayProps> = ({ timeLeft, progress, mode, theme }) => {
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
-  const colors = modeColors[mode];
 
   const radius = 140;
   const circumference = 2 * Math.PI * radius;
@@ -25,14 +26,20 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({ timeLeft, progress, 
 
   return (
     <div className="relative flex items-center justify-center">
-      <svg width="320" height="320" className="transform -rotate-90">
+      {/* Glow effect behind the timer */}
+      <div
+        className="absolute w-72 h-72 rounded-full blur-3xl opacity-20 transition-colors duration-700"
+        style={{ backgroundColor: theme.timerRing }}
+      />
+      
+      <svg width="320" height="320" className="transform -rotate-90 drop-shadow-2xl relative">
         {/* Background circle */}
         <circle
           cx="160"
           cy="160"
           r={radius}
           fill="none"
-          stroke="#e5e7eb"
+          stroke="rgba(255,255,255,0.15)"
           strokeWidth="8"
         />
         {/* Progress circle */}
@@ -41,20 +48,27 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({ timeLeft, progress, 
           cy="160"
           r={radius}
           fill="none"
-          stroke={colors.ring}
+          stroke={theme.timerRing}
           strokeWidth="8"
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
-          className="transition-all duration-1000 ease-linear"
+          style={{ transition: 'stroke-dashoffset 1s linear, stroke 0.7s ease' }}
+          filter="drop-shadow(0 0 6px rgba(0,0,0,0.2))"
         />
       </svg>
       <div className="absolute flex flex-col items-center">
-        <span className={`text-6xl font-bold tracking-tight ${colors.text} tabular-nums`}>
+        <span
+          className="text-6xl font-bold tracking-tight tabular-nums text-white"
+          style={{ textShadow: '0 2px 20px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1)' }}
+        >
           {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
         </span>
-        <span className="text-sm text-gray-400 mt-2 uppercase tracking-wider">
-          {mode === 'focus' ? 'Focus Time' : mode === 'shortBreak' ? 'Short Break' : 'Long Break'}
+        <span
+          className="text-sm mt-2 uppercase tracking-wider font-medium"
+          style={{ color: theme.accent, textShadow: '0 1px 8px rgba(0,0,0,0.3)' }}
+        >
+          {modeLabels[mode]}
         </span>
       </div>
     </div>

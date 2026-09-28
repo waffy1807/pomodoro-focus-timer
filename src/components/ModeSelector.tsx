@@ -1,10 +1,12 @@
 import React from 'react';
+import { BackgroundTheme } from '../data/backgrounds';
 
 type Mode = 'focus' | 'shortBreak' | 'longBreak';
 
 interface ModeSelectorProps {
   mode: Mode;
   onModeChange: (mode: Mode) => void;
+  theme: BackgroundTheme;
 }
 
 const modes: { key: Mode; label: string }[] = [
@@ -13,22 +15,22 @@ const modes: { key: Mode; label: string }[] = [
   { key: 'longBreak', label: 'Long Break' },
 ];
 
-const modeStyles: Record<Mode, { active: string; hover: string }> = {
-  focus: { active: 'bg-red-500 text-white shadow-lg shadow-red-200', hover: 'hover:bg-red-50 text-red-600' },
-  shortBreak: { active: 'bg-emerald-500 text-white shadow-lg shadow-emerald-200', hover: 'hover:bg-emerald-50 text-emerald-600' },
-  longBreak: { active: 'bg-blue-500 text-white shadow-lg shadow-blue-200', hover: 'hover:bg-blue-50 text-blue-600' },
-};
-
-export const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onModeChange }) => {
+export const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onModeChange, theme }) => {
   return (
-    <div className="flex gap-2 p-1 bg-gray-100 rounded-xl">
+    <div className="flex gap-1 p-1.5 bg-white/15 backdrop-blur-md rounded-xl border border-white/20 shadow-lg">
       {modes.map(({ key, label }) => (
         <button
           key={key}
           onClick={() => onModeChange(key)}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-            mode === key ? modeStyles[key].active : `${modeStyles[key].hover} text-gray-500`
+            mode === key
+              ? 'text-white shadow-md'
+              : 'text-white/70 hover:text-white hover:bg-white/10'
           }`}
+          style={{
+            backgroundColor: mode === key ? theme.modeActive : 'transparent',
+            color: mode === key ? theme.modeActiveText : undefined,
+          }}
         >
           {label}
         </button>
